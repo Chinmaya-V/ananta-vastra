@@ -6,8 +6,8 @@ import './categories.styles.scss'
 const Categories = () => {
   return (
     <div className="categories-container">
-      {CATEGORIES.map(({ id, title }) => (
-        <CategoryItem key={`categoryID-${id}`} title={title} />
+      {CATEGORIES.map(({ id, title, imageURL }) => (
+        <CategoryItem key={`categoryID-${id}`} title={title} imageURL={imageURL} />
       ))}
     </div>
   )

@@ -4,7 +4,7 @@ import './category-item.styles.scss'
 const CategoryItem = ({ title, imageURL }) => {
   return (
     <div className="category-container">
-      {/* <img /> */}
+      <img className="background-image" alt={`${title}-category-pic`} src={imageURL} />
       <div className="category-body-container">
         <h2>{title}</h2>
         <p>Shop now</p>
