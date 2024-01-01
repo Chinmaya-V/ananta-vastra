@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <div className="logo-container">
       <img alt="logoAV" src={`${process.env.PUBLIC_URL}/logos/logoAV.png`} />
-      <h3 className="logo-text">Ananta Vastra</h3>
+      <h3 className="logo-text">AnantaVastra</h3>
     </div>
   )
 }

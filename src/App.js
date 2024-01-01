@@ -9,6 +9,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
+          <Route path="shop" element={<div>{'I am Shopping Page'}</div>} />
+          <Route path="contact" element={<div>{'I am Contact Page'}</div>} />
+          <Route path="sign-in" element={<div>{'I am Sign In & Sign Up Page Both'}</div>} />
           {/* <Route path="temp" element={} /> */}
         </Route>
       </Routes>

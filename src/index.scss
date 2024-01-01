@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,6 +15,12 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: #455769;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
