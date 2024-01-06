@@ -1,0 +1,19 @@
+.logo-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: transparent;
+  padding: 8px;
+  height: 48px;
+  width: fit-content;
+
+  img {
+    height: 48px;
+  }
+}
+
+.logo-text {
+  margin: 0;
+  font-variant: petite-caps;
+  line-height: 48px;
+}
