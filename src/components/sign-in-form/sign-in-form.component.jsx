@@ -33,10 +33,20 @@ const SignInForm = () => {
     }
 
     try {
-      const response = await signInUserWithEmailAndPassword(email, password)
+      await signInUserWithEmailAndPassword(email, password)
       resetFormFields()
     } catch (error) {
-      console.error(error.code)
+      switch (error.code) {
+        case 'auth/wrong-password':
+          alert('Incorrect Password !!!')
+          break
+        case 'auth/user-not-found':
+          alert('No User Associated with this Email !!!')
+          break
+        default:
+          console.error(error.code)
+          break
+      }
     }
   }
 
@@ -70,7 +80,7 @@ const SignInForm = () => {
 
         <Button type="submit">Sign In</Button>
       </form>
-      <p className="or-text">OR</p>
+      <p className="or-text">Or</p>
       <Button buttonType={'google'} onClick={signInWithGoogle}>
         <GoogleLogoSvg size="32px" />
         Sign In With Google

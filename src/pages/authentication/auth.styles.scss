@@ -1,0 +1,46 @@
+.auth-page-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    height: auto;
+    flex-direction: column;
+  }
+  .auth-image-container {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 80%;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+  .auth-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+
+    .toggle-text {
+      font-size: small;
+      &:hover {
+        font-weight: 600;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}

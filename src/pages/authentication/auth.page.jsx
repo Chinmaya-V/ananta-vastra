@@ -1,14 +1,23 @@
-import React from 'react'
-import SignUpForm from '../../components/sign-up-form/sign-up-form.component'
-import SignInForm from '../../components/sign-in-form/sign-in-form.component'
+import React, { useState } from 'react'
+import { SignInForm, SignUpForm } from '../../components'
+import loginImage from '../../assets/login-page-pic.png'
+import './auth.styles.scss'
 
 const Authentication = () => {
-
-
+  const [toggleSignIn, setToggleSignIn] = useState(false)
   return (
-    <div style={{display: 'flex', width: '100%', justifyContent: 'space-evenly'}}>
-      <SignInForm />
-      <SignUpForm />
+    <div className="auth-page-container">
+      <div className="auth-image-container">
+        <img src={loginImage} alt="login-page-pic" />
+      </div>
+      <div className="auth-form-container">
+        {toggleSignIn ? <SignInForm /> : <SignUpForm />}
+        <div className="toggle-text" onClick={() => setToggleSignIn((prev) => !prev)}>
+          {toggleSignIn
+            ? "Don't have an Account? Click here to Sign Up"
+            : 'Already have an Account? Click here to Sign In '}
+        </div>
+      </div>
     </div>
   )
 }
