@@ -4,18 +4,20 @@
   height: 48px;
   letter-spacing: 0.5px;
   line-height: 48px;
-  padding: 0 32px 0 32px;
-  font-size: 15px;
+  padding: 0 32px;
+  font-size: 16px;
   background-color: black;
   color: white;
   text-transform: uppercase;
   font-family: 'Source Sans 3';
-  font-weight: bolder;
+  font-weight: bold;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 8px;
 
   &:hover {
     background-color: white;
@@ -24,11 +26,11 @@
   }
 
   &.google-sign-in {
-    background-color: #2777f7;
+    background-color: #488ef7;
     color: white;
 
     &:hover {
-      background-color: #0f50b8;
+      background-color: #0f5ad3;
       border: none;
     }
   }

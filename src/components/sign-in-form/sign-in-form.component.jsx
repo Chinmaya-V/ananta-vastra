@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import {
-  createAuthUserUsingEmailAndPassword,
   createUserDocumentFromAuth,
+  signInUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from '../../utils/firebase/firebase'
 import FormInput from '../form-input/form-input.component'
 import Button from '../buttons/button.component'
 import './sign-in-form.styles.scss'
+import GoogleLogoSvg from '../../assets/GoogleLogoSvg'
 
 const defaultFormFields = {
   email: '',
@@ -32,26 +33,21 @@ const SignInForm = () => {
     }
 
     try {
-      const response = await createAuthUserUsingEmailAndPassword(email, password)
-      const { user } = response
-      await createUserDocumentFromAuth(user)
+      const response = await signInUserWithEmailAndPassword(email, password)
       resetFormFields()
     } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        alert('Cannot create user, Email already in use.')
-      }
       console.error(error.code)
     }
   }
 
-  const logGoogleUser = async () => {
+  const signInWithGoogle = async () => {
     const response = await signInWithGooglePopup()
     const { user } = response
     await createUserDocumentFromAuth(user)
   }
   return (
     <div className="sign-in-container">
-      <h2>Sign Into your Account.</h2>
+      <h2>Already Have an Account ?</h2>
       <p>Sign in with your Email or Password</p>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -74,9 +70,10 @@ const SignInForm = () => {
 
         <Button type="submit">Sign In</Button>
       </form>
-      <p>OR</p>
-      <Button buttonType={'google'} onClick={logGoogleUser}>
-        Sign in with Google
+      <p className="or-text">OR</p>
+      <Button buttonType={'google'} onClick={signInWithGoogle}>
+        <GoogleLogoSvg size="32px" />
+        Sign In With Google
       </Button>
     </div>
   )
