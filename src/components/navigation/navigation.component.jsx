@@ -49,7 +49,9 @@ const NavigationBar = () => {
             <NavigationLinks />
           </div>
         )}
-        <div className={`mobile-menu-icon ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen((prev) => !prev)}>
+        <div
+          className={`mobile-menu-icon ${isMenuOpen ? 'open' : ''}`}
+          onClick={() => setIsMenuOpen((prev) => !prev)}>
           <div className="bar1"></div>
           <div className="bar2"></div>
           <div className="bar3"></div>
