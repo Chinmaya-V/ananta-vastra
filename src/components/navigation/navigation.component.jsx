@@ -9,7 +9,7 @@ const NavigationBar = () => {
   const NAVIGATION_LINKS = [
     { path: '/shop', label: 'Shop' },
     { path: '/contact', label: 'Contact' },
-    { path: '/sign-in', label: 'Sign In' },
+    { path: '/auth', label: 'Sign In' },
   ]
 
   const NavigationLinks = () => (
