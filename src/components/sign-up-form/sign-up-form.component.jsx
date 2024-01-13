@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import {
   createAuthUserUsingEmailAndPassword,
   createUserDocumentFromAuth,
@@ -6,7 +6,7 @@ import {
 import FormInput from '../form-input/form-input.component'
 import Button from '../buttons/button.component'
 import './sign-up-form.styles.scss'
-import { UserContext } from '../../contexts/user.context'
+import { useNavigate } from 'react-router-dom'
 
 const defaultFormFields = {
   displayName: '',
@@ -17,8 +17,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
   const { displayName, email, password, confirmPassword } = formFields
-
-  const { setCurrentUser } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
@@ -42,8 +41,8 @@ const SignUpForm = () => {
       const response = await createAuthUserUsingEmailAndPassword(email, password)
       const { user } = response
       await createUserDocumentFromAuth(user, { displayName })
-      setCurrentUser(user)
       resetFormFields()
+      navigate('/')
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         alert('Cannot create user, Email already in use.')

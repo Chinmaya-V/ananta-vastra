@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import {
   createUserDocumentFromAuth,
   signInUserWithEmailAndPassword,
@@ -8,7 +8,6 @@ import FormInput from '../form-input/form-input.component'
 import Button from '../buttons/button.component'
 import './sign-in-form.styles.scss'
 import GoogleLogoSvg from '../../assets/GoogleLogoSvg'
-import { UserContext } from '../../contexts/user.context'
 import { useNavigate } from 'react-router-dom'
 
 const defaultFormFields = {
@@ -18,7 +17,6 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
   const { email, password } = formFields
-  const { setCurrentUser } = useContext(UserContext)
   const navigate = useNavigate()
 
   const resetFormFields = () => {
@@ -37,10 +35,9 @@ const SignInForm = () => {
     }
 
     try {
-      const { user } = await signInUserWithEmailAndPassword(email, password)
-      setCurrentUser(user)
-      navigate('/')
+      await signInUserWithEmailAndPassword(email, password)
       resetFormFields()
+      navigate('/')
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
@@ -60,7 +57,6 @@ const SignInForm = () => {
     const response = await signInWithGooglePopup()
     const { user } = response
     await createUserDocumentFromAuth(user)
-    setCurrentUser(user)
     navigate('/')
   }
 

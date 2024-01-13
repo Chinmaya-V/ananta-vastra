@@ -9,12 +9,7 @@ const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
 
-  const { currentUser, setCurrentUser } = useContext(UserContext)
-
-  const signOutHandler = async () => {
-    await signOutUser()
-    setCurrentUser(null)
-  }
+  const { currentUser } = useContext(UserContext)
 
   const NavigationLinks = () => (
     <>
@@ -29,7 +24,7 @@ const NavigationBar = () => {
           {'Sign In'}
         </NavLink>
       ) : (
-        <NavLink to={'/auth'} className={'nav-link'} onClick={signOutHandler}>
+        <NavLink to={'/auth'} className={'nav-link'} onClick={signOutUser}>
           {'Sign Out'}
         </NavLink>
       )}
