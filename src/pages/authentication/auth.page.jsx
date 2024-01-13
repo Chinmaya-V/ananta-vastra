@@ -4,7 +4,7 @@ import loginImage from '../../assets/login-page-pic.png'
 import './auth.styles.scss'
 
 const Authentication = () => {
-  const [toggleSignIn, setToggleSignIn] = useState(false)
+  const [toggleSignIn, setToggleSignIn] = useState(true)
   return (
     <div className="auth-page-container">
       <div className="auth-image-container">

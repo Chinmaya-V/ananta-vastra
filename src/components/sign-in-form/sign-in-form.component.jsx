@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   createUserDocumentFromAuth,
   signInUserWithEmailAndPassword,
@@ -8,6 +8,8 @@ import FormInput from '../form-input/form-input.component'
 import Button from '../buttons/button.component'
 import './sign-in-form.styles.scss'
 import GoogleLogoSvg from '../../assets/GoogleLogoSvg'
+import { UserContext } from '../../contexts/user.context'
+import { useNavigate } from 'react-router-dom'
 
 const defaultFormFields = {
   email: '',
@@ -16,6 +18,8 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
   const { email, password } = formFields
+  const { setCurrentUser } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
@@ -33,7 +37,9 @@ const SignInForm = () => {
     }
 
     try {
-      await signInUserWithEmailAndPassword(email, password)
+      const { user } = await signInUserWithEmailAndPassword(email, password)
+      setCurrentUser(user)
+      navigate('/')
       resetFormFields()
     } catch (error) {
       switch (error.code) {
@@ -54,7 +60,10 @@ const SignInForm = () => {
     const response = await signInWithGooglePopup()
     const { user } = response
     await createUserDocumentFromAuth(user)
+    setCurrentUser(user)
+    navigate('/')
   }
+
   return (
     <div className="sign-in-container">
       <h2>Already Have an Account ?</h2>

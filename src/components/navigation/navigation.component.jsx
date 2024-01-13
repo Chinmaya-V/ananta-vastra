@@ -1,24 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
 import './navigation.styles.scss'
 import Logo from '../logo/logo.component'
+import { UserContext } from '../../contexts/user.context'
+import { signOutUser } from '../../utils/firebase/firebase'
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
-  const NAVIGATION_LINKS = [
-    { path: '/shop', label: 'Shop' },
-    { path: '/contact', label: 'Contact' },
-    { path: '/auth', label: 'Sign In' },
-  ]
+
+  const { currentUser, setCurrentUser } = useContext(UserContext)
+
+  const signOutHandler = async () => {
+    await signOutUser()
+    setCurrentUser(null)
+  }
 
   const NavigationLinks = () => (
     <>
-      {NAVIGATION_LINKS.map((item, index) => (
-        <NavLink key={`nav-link-${index}`} to={item.path} className={'nav-link'}>
-          {item.label}
+      <NavLink to={'/shop'} className={'nav-link'}>
+        {'Shop'}
+      </NavLink>
+      <NavLink to={'/contact'} className={'nav-link'}>
+        {'Contact'}
+      </NavLink>
+      {!currentUser ? (
+        <NavLink to={'/auth'} className={'nav-link'}>
+          {'Sign In'}
         </NavLink>
-      ))}
+      ) : (
+        <NavLink to={'/auth'} className={'nav-link'} onClick={signOutHandler}>
+          {'Sign Out'}
+        </NavLink>
+      )}
     </>
   )
   const handleResize = () => {
