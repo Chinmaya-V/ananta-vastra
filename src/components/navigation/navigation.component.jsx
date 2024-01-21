@@ -4,6 +4,7 @@ import './navigation.styles.scss'
 import Logo from '../logo/logo.component'
 import { UserContext } from '../../contexts/user.context'
 import { signOutUser } from '../../utils/firebase/firebase'
+import CartIcon from '../cart-icon/cart-icon.component'
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -51,11 +52,13 @@ const NavigationBar = () => {
         {!isMobile && (
           <div className="nav-links-container">
             <NavigationLinks />
+            <CartIcon />
           </div>
         )}
         {isMobile && isMenuOpen && (
           <div className="mobile-menu">
             <NavigationLinks />
+            <CartIcon />
           </div>
         )}
         <div
