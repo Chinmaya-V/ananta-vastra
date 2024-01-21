@@ -19,6 +19,13 @@
     }
   }
 
+  .name {
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   button {
     width: 75%;
     position: absolute;

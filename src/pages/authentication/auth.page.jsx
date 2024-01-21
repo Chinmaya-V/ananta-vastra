@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { SignInForm, SignUpForm } from '../../components'
 import loginImage from '../../assets/login-page-pic.png'
 import './auth.styles.scss'
+import SignInForm from './../../components/sign-in-form/sign-in-form.component';
+import SignUpForm from './../../components/sign-up-form/sign-up-form.component';
 
 const Authentication = () => {
   const [toggleSignIn, setToggleSignIn] = useState(true)
