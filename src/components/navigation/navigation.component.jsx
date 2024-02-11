@@ -5,12 +5,15 @@ import Logo from '../logo/logo.component'
 import { UserContext } from '../../contexts/user.context'
 import { signOutUser } from '../../utils/firebase/firebase'
 import CartIcon from '../cart-icon/cart-icon.component'
+import CartDropdown from '../cart-dropdown/cart-dropdown.component'
+import { CartContext } from '../../contexts/cart.context'
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
 
   const { currentUser } = useContext(UserContext)
+  const { isCartOpen } = useContext(CartContext)
 
   const NavigationLinks = () => (
     <>
@@ -69,6 +72,7 @@ const NavigationBar = () => {
           <div className="bar3"></div>
         </div>
       </div>
+      {isCartOpen && <CartDropdown />}
     </>
   )
 }
