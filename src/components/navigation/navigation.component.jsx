@@ -1,24 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
 import './navigation.styles.scss'
 import Logo from '../logo/logo.component'
+import { UserContext } from '../../contexts/user.context'
+import { signOutUser } from '../../utils/firebase/firebase'
+import CartIcon from '../cart-icon/cart-icon.component'
+import CartDropdown from '../cart-dropdown/cart-dropdown.component'
+import { CartContext } from '../../contexts/cart.context'
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
-  const NAVIGATION_LINKS = [
-    { path: '/shop', label: 'Shop' },
-    { path: '/contact', label: 'Contact' },
-    { path: '/sign-in', label: 'Sign In' },
-  ]
+
+  const { currentUser } = useContext(UserContext)
+  const { isCartOpen } = useContext(CartContext)
 
   const NavigationLinks = () => (
     <>
-      {NAVIGATION_LINKS.map((item, index) => (
-        <NavLink key={`nav-link-${index}`} to={item.path} className={'nav-link'}>
-          {item.label}
+      <NavLink to={'/shop'} className={'nav-link'}>
+        {'Shop'}
+      </NavLink>
+      <NavLink to={'/contact'} className={'nav-link'}>
+        {'Contact'}
+      </NavLink>
+      {!currentUser ? (
+        <NavLink to={'/auth'} className={'nav-link'}>
+          {'Sign In'}
         </NavLink>
-      ))}
+      ) : (
+        <NavLink to={'/auth'} className={'nav-link'} onClick={signOutUser}>
+          {'Sign Out'}
+        </NavLink>
+      )}
     </>
   )
   const handleResize = () => {
@@ -42,19 +55,24 @@ const NavigationBar = () => {
         {!isMobile && (
           <div className="nav-links-container">
             <NavigationLinks />
+            <CartIcon />
           </div>
         )}
         {isMobile && isMenuOpen && (
           <div className="mobile-menu">
             <NavigationLinks />
+            <CartIcon />
           </div>
         )}
-        <div className={`mobile-menu-icon ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen((prev) => !prev)}>
+        <div
+          className={`mobile-menu-icon ${isMenuOpen ? 'open' : ''}`}
+          onClick={() => setIsMenuOpen((prev) => !prev)}>
           <div className="bar1"></div>
           <div className="bar2"></div>
           <div className="bar3"></div>
         </div>
       </div>
+      {isCartOpen && <CartDropdown />}
     </>
   )
 }
