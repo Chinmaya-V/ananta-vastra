@@ -4,11 +4,11 @@ import './cart-icon.styles.scss'
 import { CartContext } from '../../contexts/cart.context'
 
 const CartIcon = () => {
-  const { setIsCartOpen,cartItems } = useContext(CartContext)
+  const { setIsCartOpen, cartCount } = useContext(CartContext)
   return (
     <div className="cart-icon-container" onClick={() => setIsCartOpen((prev) => !prev)}>
       <SvgCheckoutBag size="24px" />
-      <span className="item-count">{cartItems.length}</span>
+      <span className="item-count">{cartCount}</span>
     </div>
   )
 }
