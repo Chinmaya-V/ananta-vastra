@@ -12,9 +12,9 @@ const CheckoutComponent = () => {
           <div>
             <p>{name}</p>
             <span>
-              <p onClick={() => reduceItemFromCart(item)}>{'<'}</p>
+              <p onClick={() => reduceItemFromCart(item)}>{'-'}</p>
               <p>{quantity}</p>
-              <p onClick={() => addItemToCart(item)}>{'>'}</p>
+              <p onClick={() => addItemToCart(item)}>{'+'}</p>
             </span>
             <p>{price}</p>
             <p onClick={() => removeItem(item.id)}>Remove All</p>
