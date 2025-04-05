@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { CartContext } from '../../contexts/cart.context'
 import './checkout-item.styles.scss'
 import CancelSvg from '../../assets/svg/cancel.svg'
+import { currencyFormat } from '../../utils/functions/currencyFormat'
 
 const CheckoutItem = ({ item }) => {
   const { addItemToCart, reduceItemFromCart, removeItem } = useContext(CartContext)
@@ -13,11 +14,15 @@ const CheckoutItem = ({ item }) => {
       </div>
       <span className="name">{name}</span>
       <span className="quantity">
-        <p onClick={() => reduceItemFromCart(item)}>{'-'}</p>
-        <p>{quantity}</p>
-        <p onClick={() => addItemToCart(item)}>{'+'}</p>
+        <div className="arrow" onClick={() => reduceItemFromCart(item)}>
+          {'-'}
+        </div>
+        <span className="value">{quantity}</span>
+        <div className="arrow" onClick={() => addItemToCart(item)}>
+          {'+'}
+        </div>
       </span>
-      <span className="price">{price}</span>
+      <span className="price">{currencyFormat(price)}</span>
       <span className="remove-button" onClick={() => removeItem(item.id)}>
         <CancelSvg />
       </span>
