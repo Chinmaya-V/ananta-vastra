@@ -8,7 +8,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth'
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -66,4 +66,17 @@ export const signOutUser = async () => await signOut(auth)
 
 export const onAuthStateChangedListener = (callback) => {
   onAuthStateChanged(auth, callback)
+}
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = collection(db, collectionKey)
+  const batch = writeBatch(db)
+
+  objectsToAdd.forEach((obj) => {
+    const docRef = doc(collectionRef, obj.title.toLowerCase())
+    batch.set(docRef, obj)
+  })
+
+  await batch.commit()
+  console.log('Documents written successfully!')
 }
